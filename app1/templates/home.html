@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>云平台自动化运维系统</title>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+</head>
+<body>
+
+<!--<img src = "static/images/glodon.jpg" >-->
+   <div class="container" style = "text-align:center;width:50%;height:4%; margin:0 auto">
+      <h1>开发环境容器化</h1>
+
+   </div>
+<br></br>
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+</div>
+
+
+<div id="image_index" style="float:left;width: 10%; height: 35%; margin: 0 auto">
+镜像
+
+</div>
+
+
+<div id="os" style="float:right;width: 30%; height: 35%; margin: 0 auto">
+<!--
+<p>
+<h3 style="text-align:center;font-size:16px;">功能：统计一段时间内集群的故障率</h3>
+<h3 style="text-align:center;font-size:16px;">图表类型：柱状图</h3>
+
+<h3 style="text-align:center;font-size:16px;">输入被监控设备IP，可展示对应设备的磁盘利用率、</h3>
+<h3 style="text-align:center;font-size:16px;">CPU负载、CPU利用率和内存使用率等实时信息</h3>
+<h3 style="text-align:center;font-size:16px;">图表类型：动态曲线图</h3>
+</p>
+-->
+<form>
+<select id="os" name="os"> <option value="">选择操作系统</option> <option value="centos">CentOS7.3</option> <option value="ubuntu">Ubuntu14.10</option><option value="fedora">Fedora10</option> </select>
+<br>
+<br>
+<input type="number" name="points" min="1" max="10" />台
+<!--<input type="submit" />-->
+</form>
+
+
+
+</div>
+
+
+<div id="tool" style="float:left;width: 30%; height: 35%; margin: 0 auto">
+<form>
+<select id="tool" name="tool"> <option value="">选择组件</option> <option value="mysql">MySQL</option> <option value="redis">Redis</option><option value="nginx">Nginx</option><option value="memcached">Memcached</option> </select>
+<br>
+<br>
+<input type="number" name="points" min="1" max="10" />台
+</form>
+</div>
+
+
+<div id="develop" style="float:right;width: 30%; height: 35%; margin: 0 auto">
+<form>
+<select id="develop" name="develop"> <option value="">选择开发环境</option> <option value="C++">C/C++</option> <option value="java">JAVA</option><option value="python">Python</option><option value="golang">Golang</option> <option value="django">Django</option></select>
+<br>
+<br>
+<input type="number" name="points" min="1" max="10" />台
+</form>
+</div>
+
+<br><br>
+<div class="container" style = "text-align:center;width:100%;height:4%; margin:0 auto">
+    <button type="button" id="commit" onclick="AjaxCommit()">提交</button>
+</div>
+
+
+<br>
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+<div id="image_index" style="float:left;width: 10%; height: 35%; margin: 0 auto">
+你的资源
+
+</div>
+<div id = "down" >
+<!--
+	<form>
+		Agent IP:<select id="ip_select"  name=""> <option value="">请选择</option><option   value="1">10.11.14.197</option><option   value="2">192.168.132.42</option>  </select>  <button type="button" id="sum">提交</button><br>
+	</form>
+-->
+
+	<div id="container1" style="float:left;width: 25%; height: 40%; margin: 0 auto"></div>
+	<div id="container2" style="float:left;width: 25%; height: 40%; margin: 0 auto"></div>
+	<div id="container3" style="float:left;width: 25%; height: 40%; margin: 0 auto"></div>
+	<div id="container4" style="float:right;width: 25%; height: 40%; margin: 0 auto"></div>
+</div>
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+
+        function AjaxCommit(){
+            $.ajax({
+                type: "POST",//请求方式
+                url:"/ajax_cluster/",
+                data: {ip:"ipaddr"},
+                dataType: "json",//预期服务器返回的类型
+
+                success: function(data){
+					alert(data['dump']);
+					alert("success!");
+                },
+				error: function(data){
+				alert("failed");
+				}
+            });
+
+
+        }
+
+</script>
